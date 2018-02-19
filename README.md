@@ -20,6 +20,8 @@ yarn add react-netlify-form
 
 ## Usage
 
+With a render prop (recommended):
+
 ```jsx
 <NetlifyForm
 	name='Contact'
