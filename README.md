@@ -1,7 +1,5 @@
 # react-netlify-form
 
-WIP
-
 A React component to make using Netlify & React forms easier.
 
 ## Installation

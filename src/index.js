@@ -65,11 +65,11 @@ class ReactNetlifyForm extends React.Component {
 				name={this.props.name}
 				action={this.props.action}
 				data-netlify='true'
-				data-netlify-honeypot='bf'
+				data-netlify-honeypot={this.props.honeypotName}
 			>
 				{this.props.render(this.state)}
 				<input type='hidden' name='form-name' value={this.props.name} />
-				<input type='text' name='bf' style={{
+				<input type='text' name={this.props.honeypotName} style={{
 					display: 'none'
 				}} />
 			</form>
@@ -80,6 +80,7 @@ class ReactNetlifyForm extends React.Component {
 ReactNetlifyForm.defaultProps = {
 	name: 'Form',
 	action: 'thank-you',
+	honeypotName: '__bf',
 }
 
 export default ReactNetlifyForm
