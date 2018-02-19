@@ -1,18 +1,37 @@
-# React Component Boilerplate
+# react-netlify-form
 
-A simple React boilerplate that outputs to ES5 and ES6.
+WIP
 
-## Getting started
+A React component to make using Netlify & React forms easier.
+
+## Installation
+
+With npm:
 
 ```bash
-git clone git@github.com:escaladesports/react-component-boilerplate.git --depth=1 your-component
-cd your-component
-rm -rf .git
+npm install --save react-netlify-form
 ```
 
-Also make sure to edit the `package.json` file with a new name, version number, author, and anything else you might need.
+With Yarn:
+
+```bash
+yarn add react-netlify-form
+```
 
 ## Usage
 
-- `yarn dev`: Runs a local dev server from the `dev` directory
-- `yarn analyze`: View bundle sizes
+```jsx
+<NetlifyForm
+	name='Contact'
+	render={state => (
+		<div>
+			{ state.loading && 'Loading...' }
+			{ state.error && 'Error.' }
+			{ state.success && 'Success.' }
+			<input type='text' name='Name' />
+			<textarea name='Message' />
+			<button>Submit</button>
+		</div>
+	)}
+/>
+```
