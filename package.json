@@ -1,6 +1,6 @@
 {
   "name": "react-netlify-form",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "keywords": [
     "react",
     "netlify",
@@ -18,8 +18,8 @@
     "build": "esca-scripts build --react --component --babel --input ./src/index.js --output ./dist/index.js",
     "dev": "esca-scripts dev ---input './dev/dev.js, ./dev/index.html' --react --browser",
     "prepublishOnly": "npm run build",
-	 "reset": "esca-scripts reset",
-	 "travis": "opn https://travis-ci.org/escaladesports/react-netlify-form/branches"
+    "reset": "esca-scripts reset",
+    "travis": "opn https://travis-ci.org/escaladesports/react-netlify-form/branches"
   },
   "devDependencies": {
     "esca-scripts": "^0.14.1",
