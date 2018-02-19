@@ -3,14 +3,14 @@
   "version": "0.0.0",
   "keywords": [
     "react",
-    "component",
-    "boilerplate"
+    "netlify",
+    "form"
   ],
   "main": "dist/index.js",
   "author": "Kennedy Rose <krose@escaladesports.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/escaladesports/react-component-boilerplate.git"
+    "url": "https://github.com/escaladesports/react-netlify-form.git"
   },
   "license": "MIT",
   "scripts": {
@@ -27,6 +27,8 @@
     "react-dom": "^16.1.1"
   },
   "dependencies": {
+    "fetch-retry": "^1.1.1",
+    "form-serialize": "^0.7.2",
     "styled-jsx": "^2.2.4"
   }
 }

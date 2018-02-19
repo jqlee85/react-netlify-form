@@ -1,79 +1,85 @@
 import React from 'react'
+import fetch from 'fetch-retry'
+import serialize from 'form-serialize'
 
-export default class extends React.Component {
+function isClientSide(){
+	return !!(
+		(typeof window !== 'undefined' &&
+			window.document && window.document.createElement)
+	)
+}
+
+class ReactNetlifyForm extends React.Component {
 	constructor(props){
 		super(props)
-		this.state = { loading: false }
-		this.hideLoader = this.hideLoader.bind(this)
-		this.showLoader = this.showLoader.bind(this)
-		this.startTimeout = this.startTimeout.bind(this)
-	}
-	componentWillReceiveProps() {
-		this.startTimeout()
-	}
-	componentDidMount() {
-		if (this.img.complete) {
-			this.hideLoader()
+		this.state = {
+			error: false,
+			loading: false,
+			success: false,
 		}
-		else {
-			this.startTimeout()
+		this.onSubmit = this.onSubmit.bind(this)
+	}
+	async onSubmit(e){
+		e.preventDefault()
+
+		this.setState({
+			loading: true,
+			error: false,
+			success: false,
+		})
+
+		let headers = {
+			'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+			'X-Requested-With': 'XMLHttpRequest',
 		}
-	}
-	startTimeout() {
-		clearTimeout(this.timeout)
-		this.timeout = setTimeout(this.showLoader, 100)
-	}
-	showLoader() {
-		if (!this.img.complete) {
-			this.setState({ loading: true })
+		let body = serialize(this.form)
+		console.log(body)
+
+		let res = await fetch(this.props.action, {
+			method: 'POST',
+			body,
+			headers,
+		})
+		if(res.status !== 200){
+			return this.setState({
+				loading: false,
+				error: res.statusText,
+				success: false,
+			})
 		}
-	}
-	hideLoader() {
-		clearTimeout(this.timeout)
-		this.setState({ loading: false })
+		this.setState({
+			loading: false,
+			success: res,
+			error: false,
+		})
+
 	}
 	render(){
-		const TagName = this.props.tagName || 'img'
+		if(!this.props.silent && isClientSide()){
+			console.warn(`Netlify form rendered on client side. This form may not submit properly unless rendered server-side.`)
+		}
 		return (
-			<div style={{
-				maxWidth: this.props.width,
-				maxHeight: this.props.height,
-				margin: this.props.center ? 'auto' : ''
-			}}>
-				<div style={{
-					position: 'relative',
-					paddingBottom: `${(this.props.height / this.props.width) * 100}%`
-				}}>
-					<TagName
-						type={this.props.type}
-						srcSet={this.props.srcSet}
-						sizes={this.props.sizes}
-						src={this.props.src}
-						ref={img => this.img = img}
-						onLoad={this.hideLoader}
-						onError={this.hideLoader}
-						alt={this.props.alt}
-						style={{
-							position: 'absolute',
-							width: '100%',
-							maxWidth: '100%',
-							top: 0,
-							left: 0,
-							display: this.state.loading ? 'none' : 'block'
-						}}
-					/>
-					{this.state.loading && this.props.loading &&
-						<div style={{
-								position: 'absolute',
-								top: '50%',
-								left: '50%',
-								transform: 'translate(-50%, -50%)'
-						}}>
-							{this.props.loading}
-						</div>
-					}
-				</div>
-			</div>
+			<form
+				ref={form => this.form = form}
+				onSubmit={this.onSubmit}
+				name={this.props.name}
+				action={this.props.action}
+				data-netlify='true'
+				data-netlify-honeypot='bf'
+			>
+				{this.props.render(this.state)}
+				<input type='hidden' name='form-name' value={this.props.name} />
+				<input type='text' name='bf' style={{
+					display: 'none'
+				}} />
+			</form>
 		)
 	}
 }
+
+ReactNetlifyForm.defaultProps = {
+	name: 'Form',
+	action: 'thank-you',
+}
+
+export default ReactNetlifyForm

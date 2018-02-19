@@ -1,15 +1,22 @@
 import React from 'react'
 import { render } from 'react-dom'
-import Img from '../src/index'
+import NetlifyForm from '../src'
 
 const containerEl = document.createElement('div')
 document.body.appendChild(containerEl)
 
 render(
-	<Img
-		src='http://via.placeholder.com/500x1000'
-		width={500}
-		height={1000}
-	/>,
+	<NetlifyForm
+		silent
+		render={state => (
+			<div>
+				{state.loading && 'Loading...'}
+				{state.error && 'Error.'}
+				{state.success && 'Success.'}
+				<input type='text' name='email' />
+				<button>Submit</button>
+			</div>
+		)}
+		/>,
 	containerEl
 )
