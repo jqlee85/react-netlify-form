@@ -19,17 +19,26 @@ class NetlifyForm extends React.Component {
 	render(){
 		return (
 			<form
-				ref={form => this.form = form}
+				ref={el => this.form = el}
 				onSubmit={this.onSubmit}
 				name={this.props.name}
 				action={this.props.action}
 				data-netlify='true'
 				data-netlify-honeypot={this.props.honeypotName}
 			>
-				<input type='hidden' name='form-name' value={this.props.name} />
-				<input type='text' name={this.props.honeypotName} style={{
-					display: 'none'
-				}} />
+				<input
+					type='hidden'
+					name='form-name'
+					value={this.props.name}
+				/>
+				<input
+					ref={el => this.honeypot = el}
+					type='text'
+					name={this.props.honeypotName}
+					style={{
+						display: 'none'
+					}}
+				/>
 				{ this.props.children(this.state) }
 			</form>
 		)
