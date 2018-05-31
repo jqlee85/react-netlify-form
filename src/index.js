@@ -1,11 +1,9 @@
 import React from 'react'
-import fetch from 'fetch-retry'
-import serialize from 'form-serialize'
-
+import fetch from 'isomorphic-fetch'
 import isClientSide from './is-client-side'
 import noop from './noop'
 
-class ReactNetlifyForm extends React.Component {
+class NetlifyForm extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {
@@ -27,7 +25,7 @@ class ReactNetlifyForm extends React.Component {
 			success: false,
 		})
 
-		let body = serialize(this.form)
+		let body = new FormData(this.form)
 
 		let notValid = await this.props.validate(body)
 		if (notValid){
@@ -43,10 +41,6 @@ class ReactNetlifyForm extends React.Component {
 		let res = await fetch(this.props.action, {
 			method: 'POST',
 			body,
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-				'X-Requested-With': 'XMLHttpRequest',
-			},
 		})
 		if (res.status !== 200) {
 			return this.onError(res.statusText)
@@ -81,20 +75,18 @@ class ReactNetlifyForm extends React.Component {
 				action={this.props.action}
 				data-netlify='true'
 				data-netlify-honeypot={this.props.honeypotName}
-			>
-				{ typeof this.props.children === 'function' ?
-					this.props.children(this.state) :
-					this.props.children }
+				>
 				<input type='hidden' name='form-name' value={this.props.name} />
 				<input type='text' name={this.props.honeypotName} style={{
 					display: 'none'
 				}} />
+				{ this.props.children(this.state) }
 			</form>
 		)
 	}
 }
 
-ReactNetlifyForm.defaultProps = {
+NetlifyForm.defaultProps = {
 	name: 'Form',
 	action: 'thank-you',
 	canSubmit: true,
@@ -106,4 +98,4 @@ ReactNetlifyForm.defaultProps = {
 	honeypotName: '__bf',
 }
 
-export default ReactNetlifyForm
+export default NetlifyForm
