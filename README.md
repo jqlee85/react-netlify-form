@@ -31,7 +31,7 @@ yarn add react-netlify-form
 )}</NetlifyForm>
 ```
 
-**Note:** In order for Netlify to find your forms, [they must be server-side rendered](https://www.netlify.com/docs/form-handling/) somewhere. If you use react-netlify-form on the client side accidently, it will display a warning in the console, but the form will still render. You can work around this by adding a hidden form that renders on the server somewhere.
+**Note:** In order for Netlify to find your forms, [they must be server-side rendered](https://www.netlify.com/docs/form-handling/) somewhere. If you use react-netlify-form on the client side accidently the form will still render but it won't work. You can work around this by adding a hidden form that renders server-side elsewhere.
 
 ## Optional properties
 
@@ -42,4 +42,3 @@ yarn add react-netlify-form
 - `onError`: A function that runs if there are errors posting to Netlify.
 - `validate`: A promise function that runs before form submission. Return `true` to prevent the form from submitting.
 - `honeypotName`: The name of the honeypot field. Default: `"__bf"`
-- `silent`: Silence console warnings. Default: `false`
