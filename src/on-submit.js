@@ -15,6 +15,11 @@ async function onSubmit(e) {
 	})
 
 	let body = new FormData(this.form)
+	for (let pair of body.entries()) {
+		if (pair[0] === `g-recaptcha-response` && !pair[1]){
+			return this.onError(this.props.recatpchaError)
+		}
+	}
 
 	let notValid = await this.props.validate(body)
 	if (notValid) {
@@ -32,7 +37,7 @@ async function onSubmit(e) {
 		body,
 	})
 	if (res.status !== 200) {
-		return this.onError(res.statusText)
+		return this.onError(this.props.statusError)
 	}
 	this.onSuccess(body)
 }

@@ -42,3 +42,5 @@ yarn add react-netlify-form
 - `onError`: A function that runs if there are errors posting to Netlify.
 - `validate`: A promise function that runs before form submission. Return `true` to prevent the form from submitting.
 - `honeypotName`: The name of the honeypot field. Default: `"__bf"`
+- `recatpchaError`: The error message if a reCAPTCHA is included and failes. Default: `"Please complete reCAPTCHA to submit this form."`
+- `statusError`: The error message for a non 200 status on form submit. Default: `"The form data was not sent. Please try again later."`
