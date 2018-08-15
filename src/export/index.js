@@ -36,7 +36,7 @@ class NetlifyForm extends React.Component {
 					type='text'
 					name={this.props.honeypotName}
 					style={{
-						display: 'none'
+						display: `none`,
 					}}
 				/>
 				{ this.props.children(this.state) }

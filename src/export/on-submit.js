@@ -1,3 +1,5 @@
+/*global FormData:true*/
+/*eslint no-undef: "error"*/
 import fetch from 'isomorphic-fetch'
 
 async function onSubmit(e) {
@@ -33,7 +35,7 @@ async function onSubmit(e) {
 	this.props.onSubmit(body)
 
 	let res = await fetch(this.props.action, {
-		method: 'POST',
+		method: `POST`,
 		body,
 	})
 	if (res.status !== 200) {
