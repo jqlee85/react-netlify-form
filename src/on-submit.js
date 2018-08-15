@@ -14,12 +14,12 @@ async function onSubmit(e) {
 		success: false,
 	})
 
-	let body = new FormData(this.form)
-	for (let pair of body.entries()) {
-		if (pair[0] === `g-recaptcha-response` && !pair[1]){
-			return this.onError(this.props.recatpchaError)
-		}
+	let recaptchaResponse = this.form.querySelector(`#g-recaptcha-response`)
+	if (recaptchaResponse && !recaptchaResponse.value) {
+		return this.onError(this.props.recatpchaError)
 	}
+
+	let body = new FormData(this.form)
 
 	let notValid = await this.props.validate(body)
 	if (notValid) {
