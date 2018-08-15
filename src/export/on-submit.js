@@ -1,3 +1,5 @@
+/*global FormData:true*/
+/*eslint no-undef: "error"*/
 import fetch from 'isomorphic-fetch'
 
 async function onSubmit(e) {
@@ -14,9 +16,10 @@ async function onSubmit(e) {
 		success: false,
 	})
 
-	let recaptchaResponse = this.form.querySelector(`#g-recaptcha-response`)
-	if (recaptchaResponse && !recaptchaResponse.value) {
-		return this.onError(this.props.recatpchaError)
+	if (this.props.recaptcha) {
+		if (!this.state.recaptchaValue) {
+			return this.onError(this.props.recatpchaError)
+		}
 	}
 
 	let body = new FormData(this.form)
@@ -33,7 +36,7 @@ async function onSubmit(e) {
 	this.props.onSubmit(body)
 
 	let res = await fetch(this.props.action, {
-		method: 'POST',
+		method: `POST`,
 		body,
 	})
 	if (res.status !== 200) {

@@ -1,7 +1,9 @@
 import React from 'react'
+import Recaptcha from 'react-google-recaptcha'
 import onSubmit from './on-submit'
 import onSuccess from './on-success'
 import onError from './on-error'
+import onRecaptchaChange from './on-recaptcha-change'
 import defaultProps from './default-props'
 
 class NetlifyForm extends React.Component {
@@ -15,31 +17,39 @@ class NetlifyForm extends React.Component {
 		this.onSubmit = onSubmit.bind(this)
 		this.onSuccess = onSuccess.bind(this)
 		this.onError = onError.bind(this)
+		this.onRecaptchaChange = onRecaptchaChange.bind(this)
 	}
 	render(){
+		const {
+			name,
+			action,
+			honeypotName,
+			recaptcha,
+		} = this.props
 		return (
 			<form
 				ref={el => this.form = el}
 				onSubmit={this.onSubmit}
-				name={this.props.name}
-				action={this.props.action}
+				name={name}
+				action={action}
 				data-netlify='true'
-				data-netlify-honeypot={this.props.honeypotName}
+				data-netlify-honeypot={honeypotName}
 			>
 				<input
 					type='hidden'
 					name='form-name'
-					value={this.props.name}
+					value={name}
 				/>
 				<input
 					ref={el => this.honeypot = el}
 					type='text'
-					name={this.props.honeypotName}
-					style={{
-						display: 'none'
-					}}
+					name={honeypotName}
+					style={{ display: `none` }}
 				/>
-				{ this.props.children(this.state) }
+				{this.props.children({
+					...this.state,
+					recaptcha: <Recaptcha {...recaptcha} onChange={this.onRecaptchaChange} />,
+				})}
 			</form>
 		)
 	}
