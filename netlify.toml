@@ -2,7 +2,7 @@
 	ID = "gatsby-boilerplate"
 
 [build]
-	command = "yarn build"
+	command = "yarn build:gatsby"
 	publish = "public"
 	functions = "dist-functions"
 
