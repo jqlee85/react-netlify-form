@@ -34,6 +34,7 @@ class NetlifyForm extends React.Component {
 				action={action}
 				data-netlify='true'
 				data-netlify-honeypot={honeypotName}
+				data-netlify-recaptcha={!!recaptcha}
 			>
 				<input
 					type='hidden'
