@@ -2,7 +2,7 @@ import noop from './noop'
 
 const defaultProps = {
 	name: `Form`,
-	action: `/`,
+	action: `/thank-you`,
 	canSubmit: true,
 	onSubmit: noop,
 	onSuccess: noop,

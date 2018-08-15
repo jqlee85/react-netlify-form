@@ -39,7 +39,6 @@ async function onSubmit(e) {
 		method: `POST`,
 		body,
 	})
-	console.log(res)
 	if (res.status !== 200) {
 		return this.onError(this.props.statusError)
 	}
