@@ -16,9 +16,10 @@ async function onSubmit(e) {
 		success: false,
 	})
 
-	let recaptchaResponse = this.form.querySelector(`#g-recaptcha-response`)
-	if (recaptchaResponse && !recaptchaResponse.value) {
-		return this.onError(this.props.recatpchaError)
+	if (this.props.recaptcha) {
+		if (!this.state.recaptchaValue) {
+			return this.onError(this.props.recatpchaError)
+		}
 	}
 
 	let body = new FormData(this.form)
