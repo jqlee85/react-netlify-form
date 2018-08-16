@@ -2,7 +2,6 @@ import React from 'react'
 import Recaptcha from 'react-google-recaptcha'
 import onSubmit from './on-submit'
 import onSuccess from './on-success'
-import onError from './on-error'
 import onRecaptchaChange from './on-recaptcha-change'
 import defaultProps from './default-props'
 import awaitRecaptchaValue from './await-recaptcha-value'
@@ -17,7 +16,6 @@ class NetlifyForm extends React.Component {
 		}
 		this.onSubmit = onSubmit.bind(this)
 		this.onSuccess = onSuccess.bind(this)
-		this.onError = onError.bind(this)
 		this.onRecaptchaChange = onRecaptchaChange.bind(this)
 		this.awaitRecaptchaValue = awaitRecaptchaValue.bind(this)
 	}

@@ -17,6 +17,7 @@ async function onSubmit(e) {
 		loading: true,
 		error: false,
 		success: false,
+		recaptchaError: false,
 	})
 
 	if (this.props.recaptcha) {
@@ -27,8 +28,15 @@ async function onSubmit(e) {
 			body.append(`g-recaptcha-response`, this.state.recaptchaValue)
 		}
 		if (!this.state.recaptchaValue) {
-			console.log(`reCAPTCHA value not set`)
-			return this.onError(this.props.recatpchaError)
+			const msg = `reCAPTCHA value not set`
+			console.error(msg)
+			this.props.onError(msg)
+			return this.setState({
+				loading: false,
+				error: false,
+				success: false,
+				recaptchaError: true,
+			})
 		}
 	}
 
@@ -38,17 +46,26 @@ async function onSubmit(e) {
 			loading: false,
 			error: false,
 			success: false,
+			recaptchaError: false,
 		})
 	}
 
 	this.props.onSubmit(body)
 
-	let res = await fetch(this.props.action, {
+	let { status } = await fetch(this.props.action, {
 		method: `POST`,
 		body,
 	})
-	if (res.status !== 200) {
-		return this.onError(this.props.statusError)
+	if (status !== 200) {
+		const msg = `Status code: ${status}`
+		console.error(msg)
+		this.props.onError(msg)
+		return this.setState({
+			loading: false,
+			error: true,
+			success: false,
+			recaptchaError: false,
+		})
 	}
 	this.onSuccess(body)
 }

@@ -19,15 +19,27 @@ yarn add react-netlify-form
 ## Usage
 
 ```jsx
-<NetlifyForm>
-  {formState => (
+import NetlifyForm from 'react-netlify-form'
+
+<NetlifyForm name='Contact Form'>
+  {({ loading, error, success }) => (
     <div>
-      { formState.loading && 'Loading...' }
-      { formState.error && 'Error.' }
-      { formState.success && 'Success.' }
-      <input type='text' name='Name' required />
-      <textarea name='Message' required />
-      <button>Submit</button>
+      {loading &&
+        <div>Loading...</div>
+      }
+      {error &&
+        <div>Your information was not sent. Please try again later.</div>
+      }
+      {success &&
+        <div>Thank you for contacting us!</div>
+      }
+      {!loading && !success &&
+        <div>
+          <input type='text' name='Name' required />
+          <textarea name='Message' required />
+          <button>Submit</button>
+        </div>
+      }
     </div>
   )}
 </NetlifyForm>
@@ -42,16 +54,28 @@ react-netlify-form uses [react-google-recaptcha](https://github.com/dozoisch/rea
 ### reCAPTCHA v2
 
 ```jsx
-<NetlifyForm recaptcha={{
-  sitekey='my_recaptcha_site_key'
-  size='normal'
-}}>
-  {({ loading, error, success, Recaptcha }) => (
+<NetlifyForm
+  name='Form With Recaptcha'
+  recaptcha={{
+    sitekey='my_recaptcha_site_key'
+    size='normal'
+  }}
+>
+  {({ loading, error, recaptchaError, success, Recaptcha }) => (
     <div>
-      { loading && 'Loading...' }
-      { error && 'Error.' }
-      { success && 'Success.' }
-      { !loading && !success &&
+      {loading &&
+        <div>Loading...</div>
+      }
+      {error &&
+        <div>Your information was not sent. Please try again later.</div>
+      }
+      {recaptchaError &&
+        <div>Recaptcha did not match. Please make sure the box is checked.</div>
+      }
+      {success &&
+        <div>Thank you for contacting us!</div>
+      }
+      {!loading && !success &&
         <div>
           <input type='text' name='Name' required />
           <textarea name='Message' required />
@@ -67,16 +91,28 @@ react-netlify-form uses [react-google-recaptcha](https://github.com/dozoisch/rea
 ### Invisible reCAPTCHA
 
 ```jsx
-<NetlifyForm recaptcha={{
-  sitekey='my_recaptcha_site_key'
-  size='invisible'
-}}>
-  {({ loading, error, success, Recaptcha }) => (
+<NetlifyForm
+  name='Form With Invisible Recaptcha'
+  recaptcha={{
+    sitekey='my_recaptcha_site_key'
+    size='invisible'
+  }}
+>
+  {({ loading, error, recaptchaError, success, Recaptcha }) => (
     <div>
-      { loading && 'Loading...' }
-      { error && 'Error.' }
-      { success && 'Success.' }
-      { !loading && !success &&
+      {loading &&
+        <div>Loading...</div>
+      }
+      {error &&
+        <div>Your information was not sent. Please try again later.</div>
+      }
+      {recaptchaError &&
+        <div>Recaptcha did not match. Please make sure the box is checked.</div>
+      }
+      {success &&
+        <div>Thank you for contacting us!</div>
+      }
+      {!loading && !success &&
         <div>
           <input type='text' name='Name' required />
           <textarea name='Message' required />
