@@ -49,7 +49,9 @@ import NetlifyForm from 'react-netlify-form'
 
 ## Usage with reCAPTCHA
 
-react-netlify-form uses [react-google-recaptcha](https://github.com/dozoisch/react-google-recaptcha) under the hood, so you can pass all the same options through the `recaptcha` prop.
+This module uses [react-google-recaptcha](https://github.com/dozoisch/react-google-recaptcha) under the hood, so you can pass all the same options through the `recaptcha` prop.
+
+You will also need to follow Netlify's instructions on [bringing your own reCAPTCHA to Netlify Forms](https://www.netlify.com/blog/2018/05/23/bring-your-own-recaptcha-to-netlify-forms/), which basically just involves setting some environment variables.
 
 ### reCAPTCHA v2
 
