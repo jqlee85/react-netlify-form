@@ -130,10 +130,9 @@ react-netlify-form uses [react-google-recaptcha](https://github.com/dozoisch/rea
 
 - `name`: The form name that will show up in your Netlify dashboard. Default: `"Form"`
 - `canSubmit`: Set this to false to disable the form. Useful for things like live validation. Default: `true`
+- `recaptcha`: Your recaptcha options object for [react-google-recaptcha](https://github.com/dozoisch/react-google-recaptcha)
 - `onSubmit`: A function that runs as soon as the form is submit.
 - `onSuccess`: A function that runs as soon as the data has successfully posted to Netlify.
 - `onError`: A function that runs if there are errors posting to Netlify.
 - `validate`: A promise function that runs before form submission. Return `true` to prevent the form from submitting.
 - `honeypotName`: The name of the honeypot field. Default: `"__bf"`
-- `recatpchaError`: The error message if a reCAPTCHA is included and failes. Default: `"Please complete reCAPTCHA to submit this form."`
-- `statusError`: The error message for a non 200 status on form submit. Default: `"The form data was not sent. Please try again later."`
