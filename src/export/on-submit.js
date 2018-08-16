@@ -28,6 +28,7 @@ async function onSubmit(e) {
 				await this.awaitRecaptchaValue()
 			}
 			catch(err){
+				console.log(`reCAPTCHA execution error`)
 				console.error(err)
 				return this.setState({
 					loading: false,
