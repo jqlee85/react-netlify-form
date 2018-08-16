@@ -23,8 +23,19 @@ async function onSubmit(e) {
 	if (this.props.recaptcha) {
 		if (this.props.recaptcha.size === `invisible`) {
 			console.log(`Executing invisible reCAPTCHA...`)
-			this.recaptchaEl.execute()
-			await this.awaitRecaptchaValue()
+			try {
+				await this.recaptchaEl.execute()
+				await this.awaitRecaptchaValue()
+			}
+			catch(err){
+				console.error(err)
+				return this.setState({
+					loading: false,
+					error: false,
+					success: false,
+					recaptchaError: true,
+				})
+			}
 			body.append(`g-recaptcha-response`, this.state.recaptchaValue)
 		}
 		if (!this.state.recaptchaValue) {
