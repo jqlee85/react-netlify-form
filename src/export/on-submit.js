@@ -11,6 +11,8 @@ async function onSubmit(e) {
 		return
 	}
 
+	let body = new FormData(this.form)
+
 	this.setState({
 		loading: true,
 		error: false,
@@ -28,8 +30,6 @@ async function onSubmit(e) {
 			return this.onError(this.props.recatpchaError)
 		}
 	}
-
-	let body = new FormData(this.form)
 
 	let notValid = await this.props.validate(body)
 	if (notValid) {
