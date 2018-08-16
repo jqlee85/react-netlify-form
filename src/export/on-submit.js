@@ -24,6 +24,7 @@ async function onSubmit(e) {
 			console.log(`Executing invisible reCAPTCHA...`)
 			this.recaptchaEl.execute()
 			await this.awaitRecaptchaValue()
+			body.append(`g-recaptcha-response`, this.state.recaptchaValue)
 		}
 		if (!this.state.recaptchaValue) {
 			console.log(`reCAPTCHA value not set`)
