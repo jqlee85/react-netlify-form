@@ -13,21 +13,14 @@ async function onSubmit(e) {
 
 	let body = new FormData(this.form)
 
-	this.setState({
-		loading: true,
-		error: false,
-		success: false,
-		recaptchaError: false,
-	})
-
 	if (this.props.recaptcha) {
 		if (this.props.recaptcha.size === `invisible`) {
 			console.log(`Executing invisible reCAPTCHA...`)
 			try {
-				await this.recaptchaEl.execute()
-				await this.awaitRecaptchaValue()
+				let res = await this.recaptchaEl.execute()
+				console.log(`reCAPTCHA response: ${res}`)
 			}
-			catch(err){
+			catch (err) {
 				console.log(`reCAPTCHA execution error`)
 				console.error(err)
 				return this.setState({
@@ -51,6 +44,13 @@ async function onSubmit(e) {
 			})
 		}
 	}
+
+	this.setState({
+		loading: true,
+		error: false,
+		success: false,
+		recaptchaError: false,
+	})
 
 	let notValid = await this.props.validate(body)
 	if (notValid) {

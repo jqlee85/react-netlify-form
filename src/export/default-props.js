@@ -9,7 +9,6 @@ const defaultProps = {
 	onError: noop,
 	validate: noop,
 	honeypotName: `__bf`,
-	recaptchaTimeout: 3000,
 }
 
 export default defaultProps

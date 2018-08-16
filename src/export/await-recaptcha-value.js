@@ -6,9 +6,5 @@ export default function awaitRecaptchaValue(){
 				resolve()
 			}
 		}, 1)
-		// setTimeout(() => {
-		// 	clearInterval(interval)
-		// 	reject()
-		// }, this.props.recaptchaTimeout)
 	})
 }
