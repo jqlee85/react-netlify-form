@@ -5,6 +5,7 @@ import onSuccess from './on-success'
 import onError from './on-error'
 import onRecaptchaChange from './on-recaptcha-change'
 import defaultProps from './default-props'
+import awaitRecaptchaValue from './await-recaptcha-value'
 
 class NetlifyForm extends React.Component {
 	constructor(props){
@@ -18,6 +19,7 @@ class NetlifyForm extends React.Component {
 		this.onSuccess = onSuccess.bind(this)
 		this.onError = onError.bind(this)
 		this.onRecaptchaChange = onRecaptchaChange.bind(this)
+		this.awaitRecaptchaValue = awaitRecaptchaValue.bind(this)
 	}
 	render(){
 		const {

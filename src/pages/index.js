@@ -26,13 +26,11 @@ export default class HomePage extends React.Component {
 									<textarea name='Message' required />
 								</div>
 								<div>
-									{recaptcha}
-								</div>
-								<div>
 									<button>Submit</button>
 								</div>
 							</Fragment>
 						}
+						{recaptcha}
 					</div>
 				)}
 			</Form>

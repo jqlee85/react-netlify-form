@@ -3,6 +3,7 @@
 import fetch from 'isomorphic-fetch'
 
 async function onSubmit(e) {
+
 	e.preventDefault()
 	if (!this.props.canSubmit) return
 	if(this.honeypot.value){
@@ -10,23 +11,23 @@ async function onSubmit(e) {
 		return
 	}
 
+	this.setState({
+		loading: true,
+		error: false,
+		success: false,
+	})
+
 	if (this.props.recaptcha) {
 		if (this.props.recaptcha.size === `invisible`) {
 			console.log(`Executing invisible reCAPTCHA...`)
-			let data = await this.recaptchaEl.execute()
-			console.log(data)
+			this.recaptchaEl.execute()
+			await this.awaitRecaptchaValue
 		}
 		if (!this.state.recaptchaValue) {
 			console.log(`reCAPTCHA value not set`)
 			return this.onError(this.props.recatpchaError)
 		}
 	}
-
-	this.setState({
-		loading: true,
-		error: false,
-		success: false,
-	})
 
 	let body = new FormData(this.form)
 

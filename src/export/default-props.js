@@ -9,6 +9,7 @@ const defaultProps = {
 	onError: noop,
 	validate: noop,
 	honeypotName: `__bf`,
+	recaptchaTimeout: 3000,
 	recatpchaError: `Please complete reCAPTCHA to submit this form.`,
 	statusError: `The form data was not sent. Please try again later.`,
 }
