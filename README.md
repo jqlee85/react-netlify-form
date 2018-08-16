@@ -19,19 +19,44 @@ yarn add react-netlify-form
 ## Usage
 
 ```jsx
-<NetlifyForm>{formState => (
-	<div>
-		{ formState.loading && 'Loading...' }
-		{ formState.error && 'Error.' }
-		{ formState.success && 'Success.' }
-		<input type='text' name='Name' required />
-		<textarea name='Message' required />
-		<button>Submit</button>
-	</div>
-)}</NetlifyForm>
+<NetlifyForm>
+  {formState => (
+    <div>
+      { formState.loading && 'Loading...' }
+      { formState.error && 'Error.' }
+      { formState.success && 'Success.' }
+      <input type='text' name='Name' required />
+      <textarea name='Message' required />
+      <button>Submit</button>
+    </div>
+  )}
+</NetlifyForm>
 ```
 
 **Note:** In order for Netlify to find your forms, [they must be server-side rendered](https://www.netlify.com/docs/form-handling/) somewhere. If you use react-netlify-form on the client side accidently the form will still render but it won't work. You can work around this by adding a hidden form that renders server-side elsewhere.
+
+## Usage with reCAPTCHA
+
+```jsx
+<NetlifyForm recaptcha={{
+  sitekey='my_recaptcha_site_key'
+  size='invisible'
+}}>
+  {({ loading, error, success, Recaptcha }) => (
+    <div>
+      { loading && 'Loading...' }
+      { error && 'Error.' }
+      { success && 'Success.' }
+      <input type='text' name='Name' required />
+      <textarea name='Message' required />
+      <Recaptcha />
+      <button>Submit</button>
+    </div>
+  )}
+</NetlifyForm>
+```
+
+react-netlify-form uses [react-google-recaptcha](https://github.com/dozoisch/react-google-recaptcha) under the hood, so you can pass all the same options through the `recaptcha` prop.
 
 ## Optional properties
 

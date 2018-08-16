@@ -17,6 +17,9 @@ async function onSubmit(e) {
 	})
 
 	if (this.props.recaptcha) {
+		if (this.props.recaptcha.size === `invisible`) {
+			await this.recaptchaEl.execute()
+		}
 		if (!this.state.recaptchaValue) {
 			return this.onError(this.props.recatpchaError)
 		}

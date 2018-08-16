@@ -49,7 +49,12 @@ class NetlifyForm extends React.Component {
 				/>
 				{this.props.children({
 					...this.state,
-					recaptcha: <Recaptcha {...recaptcha} onChange={this.onRecaptchaChange} />,
+					recaptcha:
+						<Recaptcha
+							{...recaptcha}
+							ref={el => this.recaptchaEl = el}
+							onChange={this.onRecaptchaChange}
+						/>,
 				})}
 			</form>
 		)
