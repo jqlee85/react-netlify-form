@@ -13,7 +13,8 @@ async function onSubmit(e) {
 	if (this.props.recaptcha) {
 		if (this.props.recaptcha.size === `invisible`) {
 			console.log(`Executing invisible reCAPTCHA...`)
-			await this.recaptchaEl.execute()
+			let data = await this.recaptchaEl.execute()
+			console.log(data)
 		}
 		if (!this.state.recaptchaValue) {
 			console.log(`reCAPTCHA value not set`)
