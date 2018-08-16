@@ -28,7 +28,7 @@
     "precommit": "lint-staged",
     "reset": "node utils/reset",
     "serve": "gatsby serve --open",
-    "test": "npm run build && jest"
+    "test": "echo 'No tests specified'"
   },
   "lint-staged": {
     "**/*.js": [
