@@ -25,7 +25,7 @@ export default class HomePage extends React.Component {
 								<div>
 									<textarea name='Message' required />
 								</div>
-								<div style={{display: `none`}}>
+								<div>
 									{recaptcha}
 								</div>
 								<div>
