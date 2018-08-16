@@ -26,6 +26,7 @@
     "netlify": "opn https://app.netlify.com/sites/react-netlify-form/deploys",
     "patch": "node utils/patch",
     "precommit": "lint-staged",
+    "prepublishOnly": "npm run build:module",
     "reset": "node utils/reset",
     "serve": "gatsby serve --open",
     "test": "echo 'No tests specified'",
