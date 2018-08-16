@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { recaptchaInvisibleKey } from '../../site-config'
-import Form from '../export'
+import Form from '../../dist'
 
 export default class HomePage extends React.Component {
 	render() {

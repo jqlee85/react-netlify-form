@@ -63,7 +63,7 @@ You will also need to follow Netlify's instructions on [bringing your own reCAPT
     size: 'normal'
   }}
 >
-  {({ loading, error, recaptchaError, success, Recaptcha }) => (
+  {({ loading, error, recaptchaError, success, recaptcha }) => (
     <div>
       {loading &&
         <div>Loading...</div>
@@ -81,7 +81,7 @@ You will also need to follow Netlify's instructions on [bringing your own reCAPT
         <div>
           <input type='text' name='Name' required />
           <textarea name='Message' required />
-          <Recaptcha />
+          {recaptcha}
           <button>Submit</button>
         </div>
       }
@@ -100,7 +100,7 @@ You will also need to follow Netlify's instructions on [bringing your own reCAPT
     size: 'invisible'
   }}
 >
-  {({ loading, error, recaptchaError, success, Recaptcha }) => (
+  {({ loading, error, recaptchaError, success, recaptcha }) => (
     <div>
       {loading &&
         <div>Loading...</div>
@@ -122,7 +122,7 @@ You will also need to follow Netlify's instructions on [bringing your own reCAPT
         </div>
       }
       {/* Invisible reCAPTCHA must be kept outside of conditionals */}
-      <Recaptcha />
+      {recaptcha}
     </div>
   )}
 </NetlifyForm>
