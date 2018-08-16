@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { recaptchaInvisibleKey } from '../../site-config'
 import Form from '../export'
 
 export default class HomePage extends React.Component {
@@ -7,8 +8,8 @@ export default class HomePage extends React.Component {
 			<Form
 				name='test'
 				recaptcha={{
-					size: `normal`,
-					sitekey: `6LeJKWoUAAAAAMDOdGVWk8gjYv9AUb1emJHkOmP0`,
+					size: `invisible`,
+					sitekey: recaptchaInvisibleKey,
 				}}
 			>
 				{({loading, error, success, recaptcha}) => (
@@ -24,7 +25,7 @@ export default class HomePage extends React.Component {
 								<div>
 									<textarea name='Message' required />
 								</div>
-								<div>
+								<div style={{display: `none`}}>
 									{recaptcha}
 								</div>
 								<div>
