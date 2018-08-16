@@ -37,6 +37,35 @@ yarn add react-netlify-form
 
 ## Usage with reCAPTCHA
 
+react-netlify-form uses [react-google-recaptcha](https://github.com/dozoisch/react-google-recaptcha) under the hood, so you can pass all the same options through the `recaptcha` prop.
+
+### reCAPTCHA v2
+
+```jsx
+<NetlifyForm recaptcha={{
+  sitekey='my_recaptcha_site_key'
+  size='normal'
+}}>
+  {({ loading, error, success, Recaptcha }) => (
+    <div>
+      { loading && 'Loading...' }
+      { error && 'Error.' }
+      { success && 'Success.' }
+      { !loading && !success &&
+        <div>
+          <input type='text' name='Name' required />
+          <textarea name='Message' required />
+          <Recaptcha />
+          <button>Submit</button>
+        </div>
+      }
+    </div>
+  )}
+</NetlifyForm>
+```
+
+### Invisible reCAPTCHA
+
 ```jsx
 <NetlifyForm recaptcha={{
   sitekey='my_recaptcha_site_key'
@@ -47,16 +76,19 @@ yarn add react-netlify-form
       { loading && 'Loading...' }
       { error && 'Error.' }
       { success && 'Success.' }
-      <input type='text' name='Name' required />
-      <textarea name='Message' required />
+      { !loading && !success &&
+        <div>
+          <input type='text' name='Name' required />
+          <textarea name='Message' required />
+          <button>Submit</button>
+        </div>
+      }
+      {/* Invisible reCAPTCHA must be kept outside of conditionals */}
       <Recaptcha />
-      <button>Submit</button>
     </div>
   )}
 </NetlifyForm>
 ```
-
-react-netlify-form uses [react-google-recaptcha](https://github.com/dozoisch/react-google-recaptcha) under the hood, so you can pass all the same options through the `recaptcha` prop.
 
 ## Optional properties
 
