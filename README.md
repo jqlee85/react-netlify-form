@@ -57,8 +57,8 @@ react-netlify-form uses [react-google-recaptcha](https://github.com/dozoisch/rea
 <NetlifyForm
   name='Form With Recaptcha'
   recaptcha={{
-    sitekey='my_recaptcha_site_key'
-    size='normal'
+    sitekey: 'my_recaptcha_site_key'
+    size: 'normal'
   }}
 >
   {({ loading, error, recaptchaError, success, Recaptcha }) => (
@@ -94,8 +94,8 @@ react-netlify-form uses [react-google-recaptcha](https://github.com/dozoisch/rea
 <NetlifyForm
   name='Form With Invisible Recaptcha'
   recaptcha={{
-    sitekey='my_recaptcha_site_key'
-    size='invisible'
+    sitekey: 'my_recaptcha_site_key'
+    size: 'invisible'
   }}
 >
   {({ loading, error, recaptchaError, success, Recaptcha }) => (
