@@ -37,6 +37,7 @@
       "git add"
     ]
   },
+  "main": "dist/index.js",
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "react-google-recaptcha": "^0.14.0"
