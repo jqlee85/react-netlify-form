@@ -28,7 +28,8 @@
     "precommit": "lint-staged",
     "reset": "node utils/reset",
     "serve": "gatsby serve --open",
-    "test": "echo 'No tests specified'"
+    "test": "echo 'No tests specified'",
+    "travis": "opn https://travis-ci.org/escaladesports/react-netlify-form/branches"
   },
   "lint-staged": {
     "**/*.js": [
