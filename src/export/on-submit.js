@@ -10,12 +10,6 @@ async function onSubmit(e) {
 		return
 	}
 
-	this.setState({
-		loading: true,
-		error: false,
-		success: false,
-	})
-
 	if (this.props.recaptcha) {
 		if (this.props.recaptcha.size === `invisible`) {
 			await this.recaptchaEl.execute()
@@ -24,6 +18,12 @@ async function onSubmit(e) {
 			return this.onError(this.props.recatpchaError)
 		}
 	}
+
+	this.setState({
+		loading: true,
+		error: false,
+		success: false,
+	})
 
 	let body = new FormData(this.form)
 
