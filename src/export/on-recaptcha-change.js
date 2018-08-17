@@ -1,5 +1,7 @@
-export default function onRecaptchaChange(recaptchaValue){
-	console.log(`reCAPTCHA value set`)
+export default function onRecaptchaChange(recaptchaValue) {
+	console.log(`Invisible reCAPTCHA value set`)
 	this.setState({ recaptchaValue })
-	this.process()
+	if (this.props.recaptcha && this.props.recaptcha.size === `invisible`) {
+		this.process()
+	}
 }
