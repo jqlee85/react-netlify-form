@@ -1,24 +1,22 @@
-/*global FormData:true*/
-/*eslint no-undef: "error"*/
-import fetch from 'isomorphic-fetch'
-
 async function onSubmit(e) {
-
+	console.log(`Netlify form submit...`)
 	e.preventDefault()
+
+	// If submition is disabled
 	if (!this.props.canSubmit) return
 	if(this.honeypot.value){
 		console.error(`Honeypot value is set. Cannot submit form.`)
 		return
 	}
 
-	let body = new FormData(this.form)
-
-	if (this.props.recaptcha) {
+	// Check invisible recaptcha
+	if (this.props.recaptcha && this.props.recaptcha.size === `invisible`) {
 		if (this.props.recaptcha.size === `invisible`) {
 			console.log(`Executing invisible reCAPTCHA...`)
 			try {
 				let res = await this.recaptchaEl.execute()
 				console.log(`reCAPTCHA response: ${res}`)
+				return
 			}
 			catch (err) {
 				console.log(`reCAPTCHA execution error`)
@@ -30,56 +28,11 @@ async function onSubmit(e) {
 					recaptchaError: true,
 				})
 			}
-			body.append(`g-recaptcha-response`, this.state.recaptchaValue)
-		}
-		if (!this.state.recaptchaValue) {
-			const msg = `reCAPTCHA value not set`
-			console.error(msg)
-			this.props.onError(msg)
-			return this.setState({
-				loading: false,
-				error: false,
-				success: false,
-				recaptchaError: true,
-			})
 		}
 	}
 
-	this.setState({
-		loading: true,
-		error: false,
-		success: false,
-		recaptchaError: false,
-	})
+	await this.process()
 
-	let notValid = await this.props.validate(body)
-	if (notValid) {
-		return this.setState({
-			loading: false,
-			error: false,
-			success: false,
-			recaptchaError: false,
-		})
-	}
-
-	this.props.onSubmit(body)
-
-	let { status } = await fetch(this.props.action, {
-		method: `POST`,
-		body,
-	})
-	if (status !== 200) {
-		const msg = `Status code: ${status}`
-		console.error(msg)
-		this.props.onError(msg)
-		return this.setState({
-			loading: false,
-			error: true,
-			success: false,
-			recaptchaError: false,
-		})
-	}
-	this.onSuccess(body)
 }
 
 export default onSubmit
