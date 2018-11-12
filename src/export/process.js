@@ -32,7 +32,7 @@ export default async function process(){
 	if (notValid) {
 		return this.setState({
 			loading: false,
-			error: false,
+			error: true,
 			success: false,
 			recaptchaError: false,
 		})
