@@ -59,7 +59,7 @@ You will also need to follow Netlify's instructions on [bringing your own reCAPT
 <NetlifyForm
   name='Form With Recaptcha'
   recaptcha={{
-    sitekey: 'my_recaptcha_site_key'
+    sitekey: 'my_recaptcha_site_key',
     size: 'normal'
   }}
 >
@@ -96,7 +96,7 @@ You will also need to follow Netlify's instructions on [bringing your own reCAPT
 <NetlifyForm
   name='Form With Invisible Recaptcha'
   recaptcha={{
-    sitekey: 'my_recaptcha_site_key'
+    sitekey: 'my_recaptcha_site_key',
     size: 'invisible'
   }}
 >
