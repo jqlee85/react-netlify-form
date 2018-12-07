@@ -28,15 +28,22 @@ class NetlifyForm extends React.Component {
 			honeypotName,
 			recaptcha,
 		} = this.props
+		const dataAttrs = {
+			'data-netlify': `true`,
+		}
+		if (honeypotName){
+			dataAttrs[`data-netlify-honeypot`] = honeypotName
+		}
+		if(recaptcha){
+			dataAttrs[`data-netlify-recaptcha`] = `true`
+		}
 		return (
 			<form
 				ref={el => this.form = el}
 				onSubmit={this.onSubmit}
 				name={name}
 				action={action}
-				data-netlify='true'
-				data-netlify-honeypot={honeypotName}
-				data-netlify-recaptcha={!!recaptcha}
+				{...dataAttrs}
 			>
 				<input
 					type='hidden'
