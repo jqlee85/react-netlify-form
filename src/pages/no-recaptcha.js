@@ -5,7 +5,7 @@ export default class NoRecaptcha extends React.Component {
 	render() {
 		return (
 			<Form
-				name='test'
+				name='no-recaptcha'
 			>
 				{({loading, error, success}) => (
 					<div>
