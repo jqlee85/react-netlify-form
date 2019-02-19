@@ -42,6 +42,9 @@ export default async function process(){
 
 	let { status } = await fetch(this.props.action, {
 		method: `POST`,
+		headers: {
+			"Content-Type": `application/x-www-form-urlencoded`,
+		},
 		body,
 	})
 	if (status !== 200) {
