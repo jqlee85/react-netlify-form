@@ -1,6 +1,6 @@
 {
   "name": "react-netlify-form",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "keywords": [
     "react",
     "netlify",
@@ -8,7 +8,6 @@
   ],
   "author": "Kennedy Rose <krose@escaladesports.com>",
   "scripts": {
-    "prepare": "npm run build",
     "build": "npm run build:module",
     "build:lambda": "netlify-lambda build src/functions",
     "build:gatsby": "NODE_ENV=production gatsby build",
@@ -27,7 +26,7 @@
     "netlify": "opn https://app.netlify.com/sites/react-netlify-form/deploys",
     "patch": "node utils/patch",
     "precommit": "lint-staged",
-    "prepublishOnly": "npm run build:module",
+    "prepare": "npm run build:module",
     "reset": "node utils/reset",
     "serve": "gatsby serve --open",
     "test": "echo 'No tests specified'",
