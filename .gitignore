@@ -12,8 +12,8 @@ node_modules/
 # Development/Environment
 .env
 .env.*
-dist
-dist-*
+# dist
+# dist-*
 .next
 json
 public
