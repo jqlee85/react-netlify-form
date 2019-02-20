@@ -22,7 +22,6 @@ var _qs2 = _interopRequireDefault(_qs);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/*global FormData:true*/
 /*eslint no-undef: "error"*/
 exports.default = function () {
 	var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
@@ -32,8 +31,6 @@ exports.default = function () {
 			while (1) {
 				switch (_context.prev = _context.next) {
 					case 0:
-
-						// let body = new FormData(this.form)
 						body = _qs2.default.stringify(this.form);
 
 						if (!this.props.recaptcha) {
