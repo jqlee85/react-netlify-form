@@ -1,23 +1,29 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _regenerator = require("babel-runtime/regenerator");
+var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = require("babel-runtime/helpers/asyncToGenerator");
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _isomorphicFetch = require("isomorphic-fetch");
+var _isomorphicFetch = require('isomorphic-fetch');
 
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
+var _qs = require('qs');
+
+var _qs2 = _interopRequireDefault(_qs);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/*global FormData:true*/
+/*eslint no-undef: "error"*/
 exports.default = function () {
 	var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
 		var body, msg, notValid, _ref2, status, _msg;
@@ -26,7 +32,9 @@ exports.default = function () {
 			while (1) {
 				switch (_context.prev = _context.next) {
 					case 0:
-						body = new FormData(this.form);
+
+						// let body = new FormData(this.form)
+						body = _qs2.default.stringify(this.form);
 
 						if (!this.props.recaptcha) {
 							_context.next = 8;
@@ -38,11 +46,11 @@ exports.default = function () {
 							break;
 						}
 
-						msg = "reCAPTCHA value not set";
+						msg = 'reCAPTCHA value not set';
 
 						console.error(msg);
 						this.props.onError(msg);
-						return _context.abrupt("return", this.setState({
+						return _context.abrupt('return', this.setState({
 							loading: false,
 							error: false,
 							success: false,
@@ -50,7 +58,7 @@ exports.default = function () {
 						}));
 
 					case 7:
-						body.append("g-recaptcha-response", this.state.recaptchaValue);
+						body.append('g-recaptcha-response', this.state.recaptchaValue);
 
 					case 8:
 
@@ -72,7 +80,7 @@ exports.default = function () {
 							break;
 						}
 
-						return _context.abrupt("return", this.setState({
+						return _context.abrupt('return', this.setState({
 							loading: false,
 							error: true,
 							success: false,
@@ -85,9 +93,9 @@ exports.default = function () {
 
 						_context.next = 17;
 						return (0, _isomorphicFetch2.default)(this.props.action, {
-							method: "POST",
+							method: 'POST',
 							headers: {
-								"Content-Type": "application/x-www-form-urlencoded"
+								"Content-Type": 'application/x-www-form-urlencoded'
 							},
 							body: body
 						});
@@ -101,11 +109,11 @@ exports.default = function () {
 							break;
 						}
 
-						_msg = "Status code: " + status;
+						_msg = 'Status code: ' + status;
 
 						console.error(_msg);
 						this.props.onError(_msg);
-						return _context.abrupt("return", this.setState({
+						return _context.abrupt('return', this.setState({
 							loading: false,
 							error: true,
 							success: false,
@@ -116,7 +124,7 @@ exports.default = function () {
 						this.onSuccess(body);
 
 					case 25:
-					case "end":
+					case 'end':
 						return _context.stop();
 				}
 			}
@@ -128,5 +136,4 @@ exports.default = function () {
 	}
 
 	return process;
-}(); /*global FormData:true*/
-/*eslint no-undef: "error"*/
+}();

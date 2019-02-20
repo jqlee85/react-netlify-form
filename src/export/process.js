@@ -1,10 +1,10 @@
-/*global FormData:true*/
 /*eslint no-undef: "error"*/
 import fetch from 'isomorphic-fetch'
+import qs from 'qs'
 
 export default async function process(){
 
-	let body = new FormData(this.form)
+	let body = qs.stringify(this.form)
 
 	if (this.props.recaptcha) {
 		if (!this.state.recaptchaValue) {
